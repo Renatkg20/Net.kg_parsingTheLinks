@@ -1,30 +1,22 @@
 import requests 
 from bs4 import BeautifulSoup
 import urllib3
-#import re
-#import pandas as pd
 import time
 # This project created for studying purpose for developing parsing skills.
 
 # Intrated the numbers of web pages. First review 77 pages. 
 #Then save all links into the file links2.txt 
 #After the saving identified links, the another step was get links of registrated web sites. 
-for q in range(7, 77):
+for q in range(1, 78):
     url = f"https://www.net.kg/?pp=20&main_cat=&cat=&old_sort=&orient=&sort=&scroll={q}"
     user_agent = {'User-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36'}
-# res = (requests.get(url, headers = user_agent, timeout = 10 )).text
-# with open("html.txt", "w") as f:
-#      res21 = f.write(str(res.content()))
-
     http = urllib3.PoolManager(timeout=10.0)
     res = (http.request('GET', url)).data
     soup = BeautifulSoup(res, "html.parser")
     soup = soup.find("div", {"id":"main_block"}).find_all("a", {"class":"nav"})
     with open("links2.txt", "a") as f:
          f.write(str(soup))
-
-# for i in soup.get("title"):
-#     print(i)
+ 
 
 # Read the file links2.txt select titles saving it final links without tags.
 with open("links2.txt", "r") as f2:
