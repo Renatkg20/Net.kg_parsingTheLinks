@@ -4,7 +4,11 @@ import urllib3
 #import re
 #import pandas as pd
 import time
-# This project created for studying purpose NLP
+# This project created for studying purpose for developing parsing skills.
+
+# Intrated the numbers of web pages. First review 77 pages. 
+#Then save all links into the file links2.txt 
+#After the saving identified links, the another step was get links of registrated web sites. 
 for q in range(7, 77):
     url = f"https://www.net.kg/?pp=20&main_cat=&cat=&old_sort=&orient=&sort=&scroll={q}"
     user_agent = {'User-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36'}
@@ -22,7 +26,7 @@ for q in range(7, 77):
 # for i in soup.get("title"):
 #     print(i)
 
-
+# Read the file links2.txt select titles saving it final links without tags.
 with open("links2.txt", "r") as f2:
      t = f2.read()
 
@@ -34,7 +38,7 @@ for a in soup:
          links = a.get("title")
          f3.write(f"{links} \n")
          
-
+#This part code made to avoid errors due to blocking the web server. 
 try:
     def get_num_pages():
         try:
@@ -66,7 +70,7 @@ with open("links.txt", "r") as file1:
      data_links = file1.read()
 """
 
-
+# Function created for parsing each page of net.kg
 def open_links(data_links):
     res1 = data_links.split("\n")
     links = []
